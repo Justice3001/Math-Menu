@@ -216,12 +216,16 @@ void showMenu2()
 	cout << "A) Regular Calculator\t B) Factorial Solver\t C) Quadratic Equation Solver\t D) Single-Variable Equation Solver\t E) Exit\n";
 }
 
+//Recursive function to find factorial
 int factorial(int n)
 {
+	//base case
 	if (n == 0)
 	{
 		return 1;
 	}
+
+	//recurive case
 	else
 	{
 		return n * factorial(n - 1);
