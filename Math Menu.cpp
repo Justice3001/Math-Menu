@@ -228,7 +228,7 @@ int factorial(int n)
 	//recurive case
 	else
 	{
-		return n * factorial(n - 1);
+		return n * factorial(n - 1);  //fuction calls itself. n gets smaller with call until it reaches 0.
 	}
 }
 
