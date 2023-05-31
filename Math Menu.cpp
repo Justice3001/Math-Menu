@@ -1,4 +1,4 @@
-#include<iostream>
+﻿#include<iostream>
 #include "calculator.h"
 #include<vector>
 #include<string>
@@ -7,7 +7,8 @@
 #include<cstring>
 #include <sstream>
 #include<iomanip>
-using namespace std;
+#include<cctype>
+#include<limits>
 
 void showMenu();
 void showMenu1();
@@ -22,17 +23,39 @@ int main()
 	double a, b, c, x1, x2;
 	char x;
 	string equation=" ";
+	bool isValid = false;
 
 	vector<int> value;
-
+	                                           
 
 	do
 	{
 
 		showMenu2();
-		cin >> Mainchoice;
+		
 
-		switch (toupper(Mainchoice))
+		while (!isValid)
+		{
+			std::cout << "Enter a selection (A-E):";
+			std::cin >> Mainchoice;
+
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			Mainchoice = std::tolower(Mainchoice);
+
+			// Check if the input is within the valid range
+			if (Mainchoice >= 'a' && Mainchoice <= 'e') {
+				isValid = true;
+			}
+			else {
+				std::cout << "Invalid input! Please try again." << std::endl;
+			}
+		}
+
+		
+
+	
+
+		switch (toupper(Mainchoice)) //user can type in lowercase or uppercase character
 		{
 
 		 case 'A':
@@ -42,58 +65,66 @@ int main()
 				showMenu();
 				calculator obj;
 
-				cin >> Calchoice;
+				std::cin >> Calchoice;
 
+
+				//for addition
 				if (Calchoice == 1)
 				{
-					cout << "Enter first number: ";
-					cin >> val;
+					std::cout << "Enter first number: ";
+					std::cin >> val;
 
-					cout << "enter second number: ";
-					cin >> val2;
+					std::cout << "enter second number: ";
+					std::cin >> val2;
 
 					obj.setNum(val, val2);
 
-					cout << val << " + " << val2 << " = " << obj.getAdd() << endl;
+					std::cout << val << " + " << val2 << " = " << obj.getAdd() << endl;
 				}
+
+				//for subtraction
 				else if (Calchoice == 2)
 				{
-					cout << "Enter first number: ";
-					cin >> val;
+					std::cout << "Enter first number: ";
+					std::cin >> val;
 
-					cout << "enter second number: ";
-					cin >> val2;
+					std::cout << "enter second number: ";
+					std::cin >> val2;
 
 					obj.setNum(val, val2);
 
-					cout << val << " - " << val2 << " = " << obj.getsub() << endl;
+					std::cout << val << " - " << val2 << " = " << obj.getsub() << endl;
 				}
+
+				//for mulitplication
 				else if (Calchoice == 3)
 				{
-					cout << "Enter first number: ";
-					cin >> val;
+					std::cout << "Enter first number: ";
+					std::cin >> val;
 
-					cout << "enter second number: ";
-					cin >> val2;
+					std::cout << "enter second number: ";
+					std::cin >> val2;
 
 					obj.setNum(val, val2);
 
-					cout << val << " * " << val2 << " = " << obj.getMulti() << endl;
+					std::cout << val << " * " << val2 << " = " << obj.getMulti() << endl;
 				}
+
+				//for division
 				else if (Calchoice == 4)
 				{
-					cout << "Enter first number: ";
-					cin >> val;
+					std::cout << "Enter first number: ";
+					std::cin >> val;
 
-					cout << "enter second number: ";
-					cin >> val2;
+					std::cout << "enter second number: ";
+					std::cin >> val2;
 
 					obj.setNum(val, val2);
 
-					cout << val << " / " << val2 << " = " << obj.getDiv() << endl;
+					std::cout << val << " / " << val2 << " = " << obj.getDiv() << endl;
 				}
 				else
-					cout << "okay bye!\n";
+					std::cout << "okay bye!\n";
 
 			} while (Calchoice != 5);
 
@@ -101,119 +132,132 @@ int main()
 
 		 case 'B':
 			showMenu1();
-			cin >> numberFactorial;
+			std::cin >> numberFactorial;
 
 
-			cout << "the factorial of " << numberFactorial << "! is ";
-			cout << factorial(numberFactorial) << " or ";
+			std::cout << "the factorial of " << numberFactorial << "! is ";
+			std::cout << factorial(numberFactorial) << " or ";
 
+			//outputs the factorial in the form n*(n-1)*(n-2)*...*1 or example: 4!=4*3*2*1
 			for (int index = numberFactorial; index > 0; index--)
 			{
 				if (index == 1)
 				{
-					cout << index << " ";
+					std::cout << index << " ";
 
 				}
 				else
 				{
-					cout << index << "*";
+					std::cout << index << "*";
 
 				}
 			}
 
-			cout << "\n";
+			std::cout << "\n";
 
 			break;
 
 		 case 'C':
 
-			cout << "\nA quadratic equation is given as: aX^2 + bX + c = 0\n";
+			//requires understanding of quadratic equations and how to apply formula
+
+			std::cout << "\nA quadratic equation is given as: aX^2 + bX + c = 0\n";
 
 			float a, b, c, x1, x2, discriminant, realPart, imaginaryPart;
 
-			cout << "Enter coefficients a, b and c:\n";
-			cout << "a:";
-			cin >> a;
+			std::cout << "Enter coefficients a, b and c:\n";
+			std::cout << "a:";
+			std::cin >> a;
 
-			cout << "b:";
-			cin >> b;
+			std::cout << "b:";
+			std::cin >> b;
 
-			cout << "c:";
-			cin >> c;
+			std::cout << "c:";
+			std::cin >> c;
 
-			discriminant = b * b - 4 * a * c;
+			discriminant = b * b - 4 * a * c; //finds the discriminant or (b2 - 4ac)
 
-			if (discriminant > 0) {
-				x1 = (-b + sqrt(discriminant)) / (2 * a);
+			//D > 0, the roots are real and distinct
+			if (discriminant > 0)
+			{
+				//x = [-b ± √(b2 - 4ac)]/2a (applies quadratic formula)
+				// discriminant=(b2 - 4ac)
+				x1 = (-b + sqrt(discriminant)) / (2 * a); 
 				x2 = (-b - sqrt(discriminant)) / (2 * a);
-				cout << "Roots are real and different." << endl;
-				cout << "x1 = " << x1 << endl;
-				cout << "x2 = " << x2 << endl;
+				std::cout << "Roots are real and different." << endl;
+				std::cout << "x1 = " << x1 << endl;
+				std::cout << "x2 = " << x2 << endl;
 			}
 
-			else if (discriminant == 0) {
-				cout << "Roots are real and same." << endl;
+			//D = 0, the roots are real and equal.
+			else if (discriminant == 0)
+			{
+				std::cout << "Roots are real and same." << endl;
 				x1 = -b / (2 * a);
-				cout << "x1 = x2 =" << x1 << endl;
+				std::cout << "x1 = x2 =" << x1 << endl;
 			}
 
-			else {
+			//D < 0, the roots do not exist or the roots are imaginary
+			else
+			{
 				realPart = -b / (2 * a);
 				imaginaryPart = sqrt(-discriminant) / (2 * a);
-				cout << "Roots are complex and different." << endl;
-				cout << "x1 = " << realPart << "+" << imaginaryPart << "i" << endl;
-				cout << "x2 = " << realPart << "-" << imaginaryPart << "i" << endl;
+				std::cout << "Roots are complex and different." << endl;
+				std::cout << "x1 = " << realPart << "+" << imaginaryPart << "i" << endl;
+				std::cout << "x2 = " << realPart << "-" << imaginaryPart << "i" << endl;
 			}
 
-			cout << "\n";
+			std::cout << "\n";
 
 			
 			break;
 
 		 case 'D':
-
-			 cout << "Examples: x+2=10, 5x+8=25, 6x+5=7x-30\n";
-			 cout << "Enter an equation:";
-			 cin.ignore();
-			 getline(cin, equation);
-			 cout <<setprecision(2) << showpoint << solveEquation(equation) << endl;
+			 std::cout << "Can solve single variable equations only.\n ";
+			 std::cout << "Examples: x+2=10, 5x+8=25, 6x+5=7x-30\n";
+			 std::cout << "Enter an equation:";
+			 std::cin.ignore();
+			 getline(std::cin, equation);
+			 std::cout <<setprecision(2) << showpoint << solveEquation(equation) << endl;
 
 			 break;
 
 		 case 'E':
-			 cout << "okay bye";
+			 std::cout << "okay bye";
 			 exit(0);
 
 		}
 
 
-		cout << "Main Menu? (y/n)";
-		cin >> MainchoiceAgain;
+		std::cout << "Main Menu? (y/n)";
+		std::cin >> MainchoiceAgain;
 
 	} while (MainchoiceAgain == 'y');
 
 }
 	
 
-	
+//calculator menu
 void showMenu()
 {
-	cout << "This is a calculator program.\n";
-	cout << " 1) Add\n 2) Subtract\n 3) Multiply\n 4) Divide\n 5) Exit\n\n";
-	cout << "Enter selection: ";
+	std::cout << "This is a calculator program.\n";
+	std::cout << " 1) Add\n 2) Subtract\n 3) Multiply\n 4) Divide\n 5) Exit\n\n";
+	std::cout << "Enter selection: ";
 }
 
+//factorial menu
 void showMenu1()
 {
-	cout << "This program caculates the factorial of any number\n ";
-	cout << "Enter a number: ";
+	std::cout << "This program caculates the factorial of any number\n ";
+	std::cout << "Enter a number: ";
 }
 
+//main menu
 void showMenu2()
 {
-	cout << "This is math calculator program\n";
-	cout << "What type of calculator do you want:";
-	cout << "A) Regular Calculator\t B) Factorial Solver\t C) Quadratic Equation Solver\t D) Single-Variable Equation Solver\t E) Exit\n";
+	std::cout << "This is math calculator program\n";
+	std::cout << "What type of calculator do you want:\n";
+	std::cout << "A) Regular Calculator\t B) Factorial Solver\t C) Quadratic Equation Solver\t D) Single-Variable Equation Solver\t E) Exit\n";
 }
 
 //Recursive function to find factorial
@@ -228,7 +272,7 @@ int factorial(int n)
 	//recurive case
 	else
 	{
-		return n * factorial(n - 1);  //fuction calls itself. n gets smaller with call until it reaches 0.
+		return n * factorial(n - 1);  //fuction calls itself. n gets smaller with each call until it reaches 0.
 	}
 }
 
