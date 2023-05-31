@@ -26,11 +26,11 @@ int main()
 	bool isValid = false;
 
 	vector<int> value;
-	                                           
+	                                            //just apply input validation for all cases then push.
 
 	do
 	{
-
+		
 		showMenu2();
 		
 
@@ -39,6 +39,7 @@ int main()
 			std::cout << "Enter a selection (A-E):";
 			std::cin >> Mainchoice;
 
+			//// Clear the input stream if multiple characters are entered
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			Mainchoice = std::tolower(Mainchoice);
 
