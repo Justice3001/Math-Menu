@@ -29,7 +29,7 @@ int main()
 
 	vector<int> value;
 
-	//fix spacing on output then push and done.
+	
 
 	do
 	{
