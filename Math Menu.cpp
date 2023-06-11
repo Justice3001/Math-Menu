@@ -10,9 +10,9 @@
 #include<cctype>
 #include<limits>
 
-void showMenu();
-void showMenu1();
-void showMenu2();
+void showMainMenu();
+void showFactorialMenu();
+void showCalMenu();
 int factorial(int);
 string solveEquation(string);
 
@@ -26,12 +26,12 @@ int main()
 	bool isValid = false;
 
 	vector<int> value;
-	                                            //just apply input validation for all cases then push.
+	                                            //just apply input validation for all cases then push and done.
 
 	do
 	{
 		
-		showMenu2();
+		showMainMenu();
 		
 
 		while (!isValid)
@@ -58,15 +58,27 @@ int main()
 
 		switch (toupper(Mainchoice)) //user can type in lowercase or uppercase character
 		{
-
+		
+		 //calculator selection
 		 case 'A':
 
 			do
 			{
-				showMenu();
+				showCalMenu();
 				calculator obj;
 
 				std::cin >> Calchoice;
+
+				// Check if the input is a valid number
+				while (std::cin.fail() || Calchoice < 1 || Calchoice > 5)
+				{
+					std::cin.clear();  // Clear any error flags
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+					std::cout << "Invalid input. Enter a number between 1 and 5: ";
+					std::cin >> Calchoice;
+				}
+
 
 
 				//for addition
@@ -75,12 +87,30 @@ int main()
 					std::cout << "Enter first number: ";
 					std::cin >> val;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val >= 0 && val < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val;
+					}
+
 					std::cout << "enter second number: ";
 					std::cin >> val2;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val2 >= 0 && val2 < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val2;
+					}
+
 					obj.setNum(val, val2);
 
-					std::cout << val << " + " << val2 << " = " << obj.getAdd() << endl;
+					std::cout << val << " + " << val2 << " = " << obj.getAdd() << "\n\n";
 				}
 
 				//for subtraction
@@ -89,12 +119,30 @@ int main()
 					std::cout << "Enter first number: ";
 					std::cin >> val;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val >= 0 && val < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val;
+					}
+
 					std::cout << "enter second number: ";
 					std::cin >> val2;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val2 >= 0 && val2 < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val2;
+					}
+
 					obj.setNum(val, val2);
 
-					std::cout << val << " - " << val2 << " = " << obj.getsub() << endl;
+					std::cout << val << " - " << val2 << " = " << obj.getsub() << "\n\n";
 				}
 
 				//for mulitplication
@@ -103,12 +151,30 @@ int main()
 					std::cout << "Enter first number: ";
 					std::cin >> val;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val >= 0 && val < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val;
+					}
+
 					std::cout << "enter second number: ";
 					std::cin >> val2;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val2 >= 0 && val2 < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val;
+					}
+
 					obj.setNum(val, val2);
 
-					std::cout << val << " * " << val2 << " = " << obj.getMulti() << endl;
+					std::cout << val << " * " << val2 << " = " << obj.getMulti() << "\n\n";
 				}
 
 				//for division
@@ -117,23 +183,63 @@ int main()
 					std::cout << "Enter first number: ";
 					std::cin >> val;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val >= 0 && val < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val;
+					}
+
 					std::cout << "enter second number: ";
 					std::cin >> val2;
 
+					// Check if the input is a valid number
+					while (std::cin.fail() || (val2 >= 0 && val2 < 0)) {
+						std::cin.clear();  // Clear any error flags
+						std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Discard invalid input
+
+						std::cout << "Invalid input. Enter a number (positive or negative): ";
+						std::cin >> val;
+					}
+
 					obj.setNum(val, val2);
 
-					std::cout << val << " / " << val2 << " = " << obj.getDiv() << endl;
+					std::cout << val << " / " << val2 << " = " << obj.getDiv() << "\n\n";
 				}
 				else
-					std::cout << "okay bye!\n";
+					std::cout << "okay bye! Thanks for using program.\n";
 
 			} while (Calchoice != 5);
 
 			break;
-
+			
+         //facotorial calculator selection
 		 case 'B':
-			showMenu1();
+			showFactorialMenu();
 			std::cin >> numberFactorial;
+
+			while (true) {
+				std::cout << "Enter a number greater than zero: ";
+				std::cin >> numberFactorial;
+
+				// Check if the input was a valid number
+				if (std::cin.fail()) {
+					std::cout << "Invalid input. Please enter a number." << std::endl;
+					std::cin.clear();                       // Clear the error state
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore remaining input
+				}
+				// Check if the number is greater than zero
+				else if (numberFactorial < 0) {
+					std::cout << "Invalid input. Please enter a number greater than zero." << std::endl;
+				}
+				else {
+					// Valid input, break out of the loop
+					break;
+				}
+			}
+
 
 
 			std::cout << "the factorial of " << numberFactorial << "! is ";
@@ -239,22 +345,22 @@ int main()
 	
 
 //calculator menu
-void showMenu()
+void showCalMenu()
 {
 	std::cout << "This is a calculator program.\n";
 	std::cout << " 1) Add\n 2) Subtract\n 3) Multiply\n 4) Divide\n 5) Exit\n\n";
-	std::cout << "Enter selection: ";
+	std::cout << "Select calculator operation: ";
 }
 
 //factorial menu
-void showMenu1()
+void showFactorialMenu()
 {
 	std::cout << "This program caculates the factorial of any number\n ";
 	std::cout << "Enter a number: ";
 }
 
 //main menu
-void showMenu2()
+void showMainMenu()
 {
 	std::cout << "This is math calculator program\n";
 	std::cout << "What type of calculator do you want:\n";
