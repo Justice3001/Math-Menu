@@ -23,19 +23,19 @@ int main()
 {
 	int val, val2, Calchoice, numberFactorial;
 	char MainChoice, MainChoiceAgain='y';
-	//double a, b, c, x1, x2;
 	char x;
 	string equation = " ";
 	bool isValid = false;
 
 	vector<int> value;
 
-	//just apply input validation for all cases then and fix spacing on output then push and done.
+	//fix spacing on output then push and done.
 
 	do
 	{
 
 		showMainMenu();
+		cout << endl;
 
 		do
 		{
