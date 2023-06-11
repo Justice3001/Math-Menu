@@ -15,56 +15,62 @@ void showFactorialMenu();
 void showCalMenu();
 int factorial(int);
 string solveEquation(string);
+bool validateInput(double&);
+void solveSystemOfEquations(double,double,double,double,double,double);
+double calculateDeterminant(double,double,double,double);
 
 int main()
 {
 	int val, val2, Calchoice, numberFactorial;
-	char Mainchoice, MainchoiceAgain;
-	double a, b, c, x1, x2;
+	char MainChoice, MainChoiceAgain='y';
+	//double a, b, c, x1, x2;
 	char x;
-	string equation=" ";
+	string equation = " ";
 	bool isValid = false;
 
 	vector<int> value;
-	                                            //just apply input validation for all cases then push and done.
+
+	//just apply input validation for all cases then push and done.
 
 	do
 	{
-		
+
 		showMainMenu();
-		
 
-		while (!isValid)
+		do
 		{
-			std::cout << "Enter a selection (A-E):";
-			std::cin >> Mainchoice;
+			std::cout << "Enter a selection (A-F): ";
+			std::cin >> MainChoice;
 
-			//// Clear the input stream if multiple characters are entered
+			// Clear the input stream if multiple characters are entered
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			Mainchoice = std::tolower(Mainchoice);
+
+			// Convert the input to lowercase for case-insensitive comparison
+			MainChoice = std::tolower(MainChoice);
 
 			// Check if the input is within the valid range
-			if (Mainchoice >= 'a' && Mainchoice <= 'e') {
+			if (MainChoice >= 'a' && MainChoice <= 'f') {
 				isValid = true;
 			}
 			else {
 				std::cout << "Invalid input! Please try again." << std::endl;
 			}
-		}
+		} while (!isValid);
 
-		
 
-	
 
-		switch (toupper(Mainchoice)) //user can type in lowercase or uppercase character
+		//user can type in lowercase or uppercase character
+		switch (toupper(MainChoice))
 		{
-		
-		 //calculator selection
-		 case 'A':
+
+			//calculator selection
+		case 'A':
 
 			do
 			{
 				showCalMenu();
+
+				//instance of calculatot object
 				calculator obj;
 
 				std::cin >> Calchoice;
@@ -78,6 +84,7 @@ int main()
 					std::cout << "Invalid input. Enter a number between 1 and 5: ";
 					std::cin >> Calchoice;
 				}
+
 
 
 
@@ -211,12 +218,14 @@ int main()
 				else
 					std::cout << "okay bye! Thanks for using program.\n";
 
+
+
 			} while (Calchoice != 5);
 
 			break;
-			
-         //facotorial calculator selection
-		 case 'B':
+
+			//facotorial calculator selection
+		case 'B':
 			showFactorialMenu();
 			std::cin >> numberFactorial;
 
@@ -264,23 +273,65 @@ int main()
 
 			break;
 
-		 case 'C':
+		case 'C':
 
 			//requires understanding of quadratic equations and how to apply formula
 
 			std::cout << "\nA quadratic equation is given as: aX^2 + bX + c = 0\n";
 
-			float a, b, c, x1, x2, discriminant, realPart, imaginaryPart;
+			double a, b, c, x1, x2, discriminant, realPart, imaginaryPart;
 
-			std::cout << "Enter coefficients a, b and c:\n";
-			std::cout << "a:";
-			std::cin >> a;
 
-			std::cout << "b:";
-			std::cin >> b;
 
-			std::cout << "c:";
-			std::cin >> c;
+			do {
+				std::cout << "Enter coefficients a, b, and c:\n";
+				std::cout << "a: ";
+				if (std::cin >> a) {
+					// Check if the input is a valid number
+					isValid = true;
+				}
+				else {
+					std::cout << "Invalid input! Please enter a valid number.\n";
+
+					// Clear the input stream and ignore any remaining characters
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+			} while (!isValid);
+
+			isValid = false;
+
+			do {
+				std::cout << "b: ";
+				if (std::cin >> b) {
+					// Check if the input is a valid number
+					isValid = true;
+				}
+				else {
+					std::cout << "Invalid input! Please enter a valid number.\n";
+
+					// Clear the input stream and ignore any remaining characters
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+			} while (!isValid);
+
+			isValid = false;
+
+			do {
+				std::cout << "c: ";
+				if (std::cin >> c) {
+					// Check if the input is a valid number
+					isValid = true;
+				}
+				else {
+					std::cout << "Invalid input! Please enter a valid number.\n";
+
+					// Clear the input stream and ignore any remaining characters
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+			} while (!isValid);
 
 			discriminant = b * b - 4 * a * c; //finds the discriminant or (b2 - 4ac)
 
@@ -289,7 +340,7 @@ int main()
 			{
 				//x = [-b ± √(b2 - 4ac)]/2a (applies quadratic formula)
 				// discriminant=(b2 - 4ac)
-				x1 = (-b + sqrt(discriminant)) / (2 * a); 
+				x1 = (-b + sqrt(discriminant)) / (2 * a);
 				x2 = (-b - sqrt(discriminant)) / (2 * a);
 				std::cout << "Roots are real and different." << endl;
 				std::cout << "x1 = " << x1 << endl;
@@ -316,32 +367,100 @@ int main()
 
 			std::cout << "\n";
 
-			
+
+			break;
+		
+		// single varible equation solver selection
+		case 'D':
+			std::cout << "Can solve single variable equations only.\n ";
+			std::cout << "Examples: x+2=10, 5x+8=25, 6x+5=7x-30\n";
+			std::cout << "Enter an equation:";
+			std::cin.ignore();
+			getline(std::cin, equation);
+			std::cout << setprecision(2) << showpoint << solveEquation(equation) << endl;
+
 			break;
 
-		 case 'D':
-			 std::cout << "Can solve single variable equations only.\n ";
-			 std::cout << "Examples: x+2=10, 5x+8=25, 6x+5=7x-30\n";
-			 std::cout << "Enter an equation:";
-			 std::cin.ignore();
-			 getline(std::cin, equation);
-			 std::cout <<setprecision(2) << showpoint << solveEquation(equation) << endl;
+		//system of two equation solver selection
+		case 'E':
+			// Prompt the user to enter the coefficients of the equations
+			std::cout << "Enter the coefficients of the first equation (ax + by = c1):\n";
+			double a1, b1, c1;
+			std::cout << "a1: ";
+			while (!validateInput(a1))
+			{
+				std::cout << "a1: ";
+			}
+			std::cout << "b1: ";
+			while (!validateInput(b1))
+			{
+				std::cout << "b1: ";
+			}
+			std::cout << "c1: ";
+			while (!validateInput(c1))
+			{
+				std::cout << "c1: ";
+			}
 
-			 break;
+			std::cout << "Enter the coefficients of the second equation (ax + by = c2):\n";
+			double a2, b2, c2;
+			std::cout << "a2: ";
+			while (!validateInput(a2))
+			{
+				std::cout << "a2: ";
+			}
+			std::cout << "b2: ";
+			while (!validateInput(b2))
+			{
+				std::cout << "b2: ";
+			}
+			std::cout << "c2: ";
+			while (!validateInput(c2))
+			{
+				std::cout << "c2: ";
+			}
 
-		 case 'E':
-			 std::cout << "okay bye";
-			 exit(0);
+			// Solve the system of equations using Cramer's rule
+			solveSystemOfEquations(a1, b1, c1, a2, b2, c2);
+
+
+
+			break;
+
+		case 'F':
+			std::cout << "Okay bye. Thanks for using program!";
+			exit(0);
 
 		}
 
+		while (true) {
+			std::cout << "Main Menu? (y/n): ";
+			std::cin >> MainChoiceAgain;
 
-		std::cout << "Main Menu? (y/n)";
-		std::cin >> MainchoiceAgain;
+			// Convert input to lowercase for case-insensitive comparison
+			MainChoiceAgain = std::tolower(MainChoiceAgain);
 
-	} while (MainchoiceAgain == 'y');
+			if (MainChoiceAgain == 'y') {
+				// Perform action for 'y'
+				std::cout << "You selected 'y'.\n";
+				break;  // Exit the loop
+			}
+			else if (MainChoiceAgain == 'n') {
+				// Perform action for 'n'
+				std::cout << "You selected 'n'.\n";
+				break;  // Exit the loop
+			}
+			else {
+				// Invalid input
+				std::cout << "Invalid input! Please enter 'y' or 'n'.\n";
+			}
+		}
 
+
+	}while (MainChoiceAgain == 'y');
 }
+
+
 	
 
 //calculator menu
@@ -364,7 +483,7 @@ void showMainMenu()
 {
 	std::cout << "This is math calculator program\n";
 	std::cout << "What type of calculator do you want:\n";
-	std::cout << "A) Regular Calculator\t B) Factorial Solver\t C) Quadratic Equation Solver\t D) Single-Variable Equation Solver\t E) Exit\n";
+	std::cout << "A) Regular Calculator\t B) Factorial Solver\t C) Quadratic Equation Solver\t D) Single-Variable Equation Solver\t E) System of Two Equations Solver \t F) Exit\n";
 }
 
 //Recursive function to find factorial
@@ -386,8 +505,8 @@ int factorial(int n)
 // Function to solve the given equation
 string solveEquation(string equation)
 {
-	float n = equation.size(), sign = 1, coeff = 0;
-	float total = 0, i = 0;
+	double n = equation.size(), sign = 1, coeff = 0;
+	double total = 0, i = 0;
 
 	// Traverse the equation
 	for (int j = 0; j < n; j++) {
@@ -434,4 +553,48 @@ string solveEquation(string equation)
 	// numeric value to right hand side
 	float ans = -total / coeff;
 	return "x=" + to_string(ans);
+}
+
+// Function to validate user input for a double value
+bool validateInput(double& value)
+{
+	if (!(std::cin >> value))
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Invalid input. Please enter a valid number.\n";
+		return false;
+	}
+	return true;
+}
+
+void solveSystemOfEquations(double a1, double b1, double c1, double a2, double b2, double c2)
+{
+	// Calculate the determinant of the coefficient matrix
+	double determinant = calculateDeterminant(a1, b1, a2, b2);
+
+	// Check if the determinant is zero (no unique solution)
+	if (determinant == 0)
+	{
+		std::cout << "No unique solution exists for the system of equations.\n";
+		return;
+	}
+
+	// Calculate the determinants of the x and y matrices
+	double determinantX = calculateDeterminant(c1, b1, c2, b2);
+	double determinantY = calculateDeterminant(a1, c1, a2, c2);
+
+	// Calculate the solutions for x and y
+	double x = determinantX / determinant;
+	double y = determinantY / determinant;
+
+	std::cout << "Solution:\n";
+	std::cout << "x = " << x << "\n";
+	std::cout << "y = " << y << "\n";
+}
+
+// Function to calculate the determinant of a 2x2 matrix
+double calculateDeterminant(double a, double b, double c, double d)
+{
+	return (a * d) - (b * c);
 }

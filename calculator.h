@@ -17,6 +17,7 @@ public:
 	int getDiv() const;
 };
 
+//constructor
 void calculator::setNum(int thisnum, int thisnum2)
 {
 	num = thisnum;
