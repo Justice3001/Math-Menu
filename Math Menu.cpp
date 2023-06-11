@@ -30,7 +30,7 @@ int main()
 
 	vector<int> value;
 
-	//just apply input validation for all cases then push and done.
+	//just apply input validation for all cases then and fix spacing on output then push and done.
 
 	do
 	{
@@ -70,7 +70,7 @@ int main()
 			{
 				showCalMenu();
 
-				//instance of calculatot object
+				//instance of calculator object
 				calculator obj;
 
 				std::cin >> Calchoice;
@@ -152,7 +152,7 @@ int main()
 					std::cout << val << " - " << val2 << " = " << obj.getsub() << "\n\n";
 				}
 
-				//for mulitplication
+				//for multiplication
 				else if (Calchoice == 3)
 				{
 					std::cout << "Enter first number: ";
@@ -224,7 +224,7 @@ int main()
 
 			break;
 
-			//facotorial calculator selection
+			//factorial calculator selection
 		case 'B':
 			showFactorialMenu();
 			std::cin >> numberFactorial;
@@ -370,7 +370,7 @@ int main()
 
 			break;
 		
-		// single varible equation solver selection
+		// single variable equation solver selection
 		case 'D':
 			std::cout << "Can solve single variable equations only.\n ";
 			std::cout << "Examples: x+2=10, 5x+8=25, 6x+5=7x-30\n";
@@ -474,7 +474,7 @@ void showCalMenu()
 //factorial menu
 void showFactorialMenu()
 {
-	std::cout << "This program caculates the factorial of any number\n ";
+	std::cout << "This program calculates the factorial of any number\n ";
 	std::cout << "Enter a number: ";
 }
 
@@ -495,7 +495,7 @@ int factorial(int n)
 		return 1;
 	}
 
-	//recurive case
+	//recursive case
 	else
 	{
 		return n * factorial(n - 1);  //fuction calls itself. n gets smaller with each call until it reaches 0.
@@ -555,7 +555,7 @@ string solveEquation(string equation)
 	return "x=" + to_string(ans);
 }
 
-// Function to validate user input for a double value
+// Function to validate user input for a double value for choice (E) or system of two equations selection
 bool validateInput(double& value)
 {
 	if (!(std::cin >> value))
@@ -568,6 +568,8 @@ bool validateInput(double& value)
 	return true;
 }
 
+//recives a return value of calculateDeterminant function and determines the x and y solution if it exits.
+//requires knowledge on system of system of equations, there are many methods this one uses cramers rule for simplicity.
 void solveSystemOfEquations(double a1, double b1, double c1, double a2, double b2, double c2)
 {
 	// Calculate the determinant of the coefficient matrix
