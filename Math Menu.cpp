@@ -115,9 +115,9 @@ int main()
 						std::cin >> val2;
 					}
 
-					obj.setNum(val, val2);
+					obj.setNumbers(val, val2);
 
-					std::cout << val << " + " << val2 << " = " << obj.getAdd() << "\n\n";
+					std::cout << val << " + " << val2 << " = " << obj.getAddition() << "\n\n";
 				}
 
 				//for subtraction
@@ -147,9 +147,9 @@ int main()
 						std::cin >> val2;
 					}
 
-					obj.setNum(val, val2);
+					obj.setNumbers(val, val2);
 
-					std::cout << val << " - " << val2 << " = " << obj.getsub() << "\n\n";
+					std::cout << val << " - " << val2 << " = " << obj.getSubtraction() << "\n\n";
 				}
 
 				//for multiplication
@@ -179,9 +179,9 @@ int main()
 						std::cin >> val;
 					}
 
-					obj.setNum(val, val2);
+					obj.setNumbers(val, val2);
 
-					std::cout << val << " * " << val2 << " = " << obj.getMulti() << "\n\n";
+					std::cout << val << " * " << val2 << " = " << obj.getMultiplication() << "\n\n";
 				}
 
 				//for division
@@ -211,9 +211,9 @@ int main()
 						std::cin >> val;
 					}
 
-					obj.setNum(val, val2);
+					obj.setNumbers(val, val2);
 
-					std::cout << val << " / " << val2 << " = " << obj.getDiv() << "\n\n";
+					std::cout << val << " / " << val2 << " = " << obj.getDivision() << "\n\n";
 				}
 				else
 					std::cout << "okay bye! Thanks for using program.\n";

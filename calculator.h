@@ -10,47 +10,52 @@ private:
 	int num, num2;
 
 public:
-	void setNum(int num, int num2);
-	int getAdd() const;
-	int getsub() const;
-	int getMulti() const;
-	int getDiv() const;
+    void setNumbers(int num, int num2);
+    int getAddition() const;
+    int getSubtraction() const;
+    int getMultiplication() const;
+    double getDivision() const;
 };
 
 //constructor
-void calculator::setNum(int thisnum, int thisnum2)
+void calculator::setNumbers(int thisnum, int thisnum2)
 {
 	num = thisnum;
 	num2 = thisnum2;
 }
 
-int calculator::getAdd() const
+int calculator::getAddition() const
 {
-	return num + num2;
+    // Return the sum of num and num2
+    return num + num2;
 }
 
-int calculator::getsub() const
+int calculator::getSubtraction() const
 {
-	return num - num2;
+    // Return the difference of num and num2
+    return num - num2;
 }
 
-int calculator::getMulti() const
+int calculator::getMultiplication() const
 {
-	return num * num2;
+    // Return the product of num and num2
+    return num * num2;
 }
 
-int calculator::getDiv() const
+double calculator::getDivision() const
 {
-	if (num2 == 0)
-	{
-		cout << "can not divide by zero\n";
-
-	}
-
-	else
-	{
-		return num / num2;
-	}
+    if (num2 == 0)
+    {
+        // Handle division by zero error and display an error message
+        cout << "Error: Division by zero is not allowed\n";
+        return 0; // Return a default value to indicate an error
+    }
+    else
+    {
+        // Return the division of num by num2
+        return num / num2;
+    }
 }
+
 
 #endif
